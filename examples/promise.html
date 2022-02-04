@@ -4,12 +4,16 @@
 		white-space: pre;
 		font-family: 'Courier New', Courier, monospace;
 		background-color: #222222;
+		border-radius: 8px;
 	}
 	p.code {
 		color: rgb(235, 41, 79);
 	}
 	p.console {
 		color: rgb(235, 190, 41);
+	}
+	h2 {
+		margin-top: 64px;
 	}
 </style>
 
@@ -49,7 +53,6 @@
 </script>
 
 <p class="code">
-
 	let asynchronousProcess = function(resolve, reject){
 
 		console.log("start asynchronousProcess at 'new Promise'");
