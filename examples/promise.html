@@ -1,3 +1,9 @@
+
+
+<script src="./WRAP_pageRootBackPath.js"></script>
+
+<script src="./start_syntaxHighlighter.js"></script>
+
 <style>
 	p {
 		tab-size: 4;
@@ -17,14 +23,15 @@
 	}
 </style>
 
+<body onload="debug_elem.process()">
 
 <h1>Promise</h1>
 
 
 <h2>One simple promise</h2>
 
-<script>
-	/*
+<script class="code" src="">
+	
 	let asynchronousProcess = function(resolve, reject){
 
 		console.log("start asynchronousProcess at 'new Promise'");
@@ -49,35 +56,8 @@
 	promise.then(resolveAsCallback);
 
 	console.log("end of script");
-	*/
+	
 </script>
-
-<p class="code">
-	let asynchronousProcess = function(resolve, reject){
-
-		console.log("start asynchronousProcess at 'new Promise'");
-
-		let lateExecution = function(){
-
-			console.log("lateExecution done");
-
-			resolve();
-		};
-
-		setTimeout(lateExecution, 1000);
-	};
-
-	let resolveAsCallback = function(){
-
-		console.log("asynchronousProcess has been executed");
-	};
-
-	let promise = new Promise(asynchronousProcess);
-
-	promise.then(resolveAsCallback);
-
-	console.log("end of script");
-</p>
 
 <p class="console">
 	start asynchronousProcess at 'new Promise'
@@ -89,8 +69,8 @@
 
 <h2>Two promises in chain</h2>
 
-<script>
-	/*
+<script class="code" src="">
+	
 	let loading_A = function(resolve, reject){
 
 		console.log("A : start loading");
@@ -131,51 +111,10 @@
 	load_A.then(waitForLoading_A);
 	
 	console.log("end of script");
-	*/
+	
 </script>
 
-<p class="code">
-	let loading_A = function(resolve, reject){
 
-		console.log("A : start loading");
-
-		let lateExecution = function(){
-			console.log("A : loaded");
-			resolve();
-		};
-
-		setTimeout(lateExecution, 1000);
-	};
-
-	let loading_B = function(resolve, reject){
-
-		console.log("B : start loading");
-
-		let lateExecution = function(){
-			console.log("B : loaded");
-			resolve();
-		};
-
-		setTimeout(lateExecution, 1000);
-	};
-
-	let waitForLoading_A = function(){
-
-		load_B.then(waitForLoading_B);
-	};
-
-	let waitForLoading_B = function(){
-
-		console.log("end of promise chain");
-	};
-	
-	let load_A = new Promise(loading_A);
-	let load_B = new Promise(loading_B);
-	
-	load_A.then(waitForLoading_A);
-	
-	console.log("end of script");
-</p>
 
 <p class="console">
 	A : start loading
@@ -185,3 +124,5 @@
 	B : loaded
 	end of promise chain
 </p>
+
+</body>

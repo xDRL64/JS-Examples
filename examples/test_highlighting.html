@@ -1,0 +1,91 @@
+
+<style>
+    .code{
+        margin: 32px 0;
+    }
+</style>
+
+<script src="./WRAP_pageRootBackPath.js"></script>
+
+<script src="./start_syntaxHighlighter.js"></script>
+
+<body onload="debug_elem.process()">
+    
+
+
+<script class="code" src="">
+    console.log("end of script");
+	
+	var env = {
+		element: element,
+		language: language,
+		grammar: grammar,
+		code: code
+	};
+</script>
+
+
+<style class="code" onload="this.disabled=true">
+
+    code{
+        border-color: brown;
+        border-style: solid;
+    }
+
+</style>
+
+<iframe class="code" style="display: none;">
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="coooode" style="display: none;">
+            test cooode
+        </div>
+    </body>
+    </html>
+
+</iframe>
+
+<code class="language-javascript">
+	let asynchronousProcess = function(resolve, reject){
+
+		console.log("start asynchronousProcess at 'new Promise'");
+
+		let lateExecution = function(){
+
+			console.log("lateExecution done");
+
+			resolve();
+		};
+
+		setTimeout(lateExecution, 1000);
+	};
+
+	let resolveAsCallback = function(){
+
+		console.log("asynchronousProcess has been executed");
+	};
+
+	let promise = new Promise(asynchronousProcess);
+
+	promise.then(resolveAsCallback);
+
+	console.log("end of script");
+	
+	var env = {
+		element: element,
+		language: language,
+		grammar: grammar,
+		code: code
+	};
+
+</code>
+
+</body>
