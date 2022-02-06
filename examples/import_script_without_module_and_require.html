@@ -1,0 +1,146 @@
+
+<script src="./WRAP_pageRootBackPath.js"></script>
+
+<script src="./start_syntaxHighlighter.js"></script>
+
+<style>
+	p {
+		tab-size: 4;
+		white-space: pre;
+		font-family: 'Courier New', Courier, monospace;
+		background-color: #222222;
+		border-radius: 8px;
+	}
+	p.console {
+		color: rgb(235, 190, 41);
+	}
+	h2 {
+		margin-top: 64px;
+	}
+</style>
+
+
+<body>
+    
+
+
+
+<h1>import script without module and require</h1>
+
+
+<h2>/root/pages/page.html</h2>
+<iframe class="code" style="display: none;">
+
+    <html>
+        <head>
+            <script src="./pageRootBackPath.js"></script>
+            <script src="../scriptImporter.js"></script>
+            <script src="./script_C.js"></script>
+        </head>
+        <body onload="console.log('body onload in html')">
+            
+        </body>
+    </html>
+
+</iframe>
+
+
+<h2>/root/pages/pageRootBackPath.js</h2>
+<script class="code" src="">
+    (function(){
+
+        console.log('pageRootBackPath.js');
+
+        let ROOT_BACK_PATH = "..";
+
+        //////////////////////////////////////////
+
+        let elem = document.createElement("span");
+        elem.style.display = "none";
+        elem.id = "elem_ROOT_BACK_PATH";
+        elem.textContent = ROOT_BACK_PATH;
+        document.head.appendChild(elem);
+
+    })();
+</script>
+
+
+<h2>/root/scriptImporter.js</h2>
+<script class="code" src="">
+    (function(){
+
+        console.log('scriptImporter.js');
+
+        let scriptList = [
+            '/scriptFolder/script_A.js',
+            '/scriptFolder/script_B.js'
+        ];
+
+        let rootPath = document.getElementById("elem_ROOT_BACK_PATH").textContent;
+
+        let path, script;
+
+        for(path of scriptList){
+            script = document.createElement("script");
+            script.setAttribute("defer", true);
+            document.head.appendChild(script);
+            script.src = rootPath + path;
+        }
+
+    })();
+</script>
+
+<h2>/root/scriptFolder/script_A.js</h2>
+<script class="code" src="">
+    (function(){
+
+        console.log('script_A.js');
+
+    })();
+</script>
+
+<h2>/root/scriptFolder/script_B.js</h2>
+<script class="code" src="">
+    (function(){
+
+        console.log('script_B.js');
+
+        document.addEventListener("readystatechange", function(){
+            console.log('readystatechange in B');
+        });
+
+    })();
+</script>
+
+<h2>/root/pages/script_C.js</h2>
+<script class="code" src="">
+    (function(){
+
+        console.log('script_C.js');
+
+        document.addEventListener("readystatechange", function(){
+            console.log('readystatechange in C');
+        });
+
+    })();
+</script>
+
+<h2>console log</h2>
+<p class="console">
+    pageRootBackPath.js
+    scriptImporter.js
+    script_C.js
+    readystatechange in C
+    script_A.js
+    script_B.js
+    readystatechange in C
+    readystatechange in B
+    body onload in html
+</p>
+
+<h2><a download="root" href="data:application/x-zip-compressed;base64,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">
+    Download Root Folder
+</a></h2>
+
+
+</body>

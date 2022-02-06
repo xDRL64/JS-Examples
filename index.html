@@ -1,26 +1,31 @@
 
 <head>
-    <link href="./external/prism-monokai.css" rel="stylesheet" />
 
-    <script src="./external/prism.js"></script>
 </head>
 
 <h1>JS Examples</h1>
 
-<a href=./examples/promise.html>promise</a> <br>
-<a href=./examples/test_highlighting.html>testhighlighting</a> <br>
 
+<body>
+    
+    
+    <a href=./examples/promise.html>promise</a> <br>
+    <a href=./examples/import_script_without_module_and_require.html>import script without module and require</a> <br>
+    
+    
+    
+    <script>
+        /*
+        let s = document.createElement("iframe");
+        
+        document.body.appendChild(s);
+        s.onload = function(e){
+            console.log(s);
+        };
+        //s.src = "data:text/html;base64,LyoNCjxwcmU+PGNvZGUgY2xhc3M9Imxhbmd1YWdlLWphdmFzY3JpcHQiPg0KCWxldCBhc3luY2hyb25vdXNQcm9jZXNzID0gZnVuY3Rpb24ocmVzb2x2ZSwgcmVqZWN0KXsNCg0KCQljb25zb2xlLmxvZygic3RhcnQgYXN5bmNocm9ub3VzUHJvY2VzcyBhdCAnbmV3IFByb21pc2UnIik7DQoNCgkJbGV0IGxhdGVFeGVjdXRpb24gPSBmdW5jdGlvbigpew0KDQoJCQljb25zb2xlLmxvZygibGF0ZUV4ZWN1dGlvbiBkb25lIik7DQoNCgkJCXJlc29sdmUoKTsNCgkJfTsNCg0KCQlzZXRUaW1lb3V0KGxhdGVFeGVjdXRpb24sIDEwMDApOw0KCX07DQoNCglsZXQgcmVzb2x2ZUFzQ2FsbGJhY2sgPSBmdW5jdGlvbigpew0KDQoJCWNvbnNvbGUubG9nKCJhc3luY2hyb25vdXNQcm9jZXNzIGhhcyBiZWVuIGV4ZWN1dGVkIik7DQoJfTsNCg0KCWxldCBwcm9taXNlID0gbmV3IFByb21pc2UoYXN5bmNocm9ub3VzUHJvY2Vzcyk7DQoNCglwcm9taXNlLnRoZW4ocmVzb2x2ZUFzQ2FsbGJhY2spOw0KDQoJY29uc29sZS5sb2coImVuZCBvZiBzY3JpcHQiKTsNCgkNCgl2YXIgZW52ID0gew0KCQllbGVtZW50OiBlbGVtZW50LA0KCQlsYW5ndWFnZTogbGFuZ3VhZ2UsDQoJCWdyYW1tYXI6IGdyYW1tYXIsDQoJCWNvZGU6IGNvZGUNCgl9Ow0KDQo8L2NvZGU+PC9wcmU+DQoqLw==";
+        s.src = "data:text/html;charset=utf-8,%2F*%0D%0A%3Cpre%3E%3Ccode%20class%3D%22language-javascript%22%3E%0D%0A%09let%20asynchronousProcess%20%3D%20function(resolve%2C%20reject)%7B%0D%0A%0D%0A%09%09console.log(%22start%20asynchronousProcess%20at%20'new%20Promise'%22)%3B%0D%0A%0D%0A%09%09let%20lateExecution%20%3D%20function()%7B%0D%0A%0D%0A%09%09%09console.log(%22lateExecution%20done%22)%3B%0D%0A%0D%0A%09%09%09resolve()%3B%0D%0A%09%09%7D%3B%0D%0A%0D%0A%09%09setTimeout(lateExecution%2C%201000)%3B%0D%0A%09%7D%3B%0D%0A%0D%0A%09let%20resolveAsCallback%20%3D%20function()%7B%0D%0A%0D%0A%09%09console.log(%22asynchronousProcess%20has%20been%20executed%22)%3B%0D%0A%09%7D%3B%0D%0A%0D%0A%09let%20promise%20%3D%20new%20Promise(asynchronousProcess)%3B%0D%0A%0D%0A%09promise.then(resolveAsCallback)%3B%0D%0A%0D%0A%09console.log(%22end%20of%20script%22)%3B%0D%0A%09%0D%0A%09var%20env%20%3D%20%7B%0D%0A%09%09element%3A%20element%2C%0D%0A%09%09language%3A%20language%2C%0D%0A%09%09grammar%3A%20grammar%2C%0D%0A%09%09code%3A%20code%0D%0A%09%7D%3B%0D%0A%0D%0A%3C%2Fcode%3E%3C%2Fpre%3E%0D%0A*%2F";
+        */
+       
+    </script>
 
-<script>
-/*
-    let s = document.createElement("iframe");
-
-    document.body.appendChild(s);
-    s.onload = function(e){
-        console.log(s);
-    };
-    //s.src = "data:text/html;base64,LyoNCjxwcmU+PGNvZGUgY2xhc3M9Imxhbmd1YWdlLWphdmFzY3JpcHQiPg0KCWxldCBhc3luY2hyb25vdXNQcm9jZXNzID0gZnVuY3Rpb24ocmVzb2x2ZSwgcmVqZWN0KXsNCg0KCQljb25zb2xlLmxvZygic3RhcnQgYXN5bmNocm9ub3VzUHJvY2VzcyBhdCAnbmV3IFByb21pc2UnIik7DQoNCgkJbGV0IGxhdGVFeGVjdXRpb24gPSBmdW5jdGlvbigpew0KDQoJCQljb25zb2xlLmxvZygibGF0ZUV4ZWN1dGlvbiBkb25lIik7DQoNCgkJCXJlc29sdmUoKTsNCgkJfTsNCg0KCQlzZXRUaW1lb3V0KGxhdGVFeGVjdXRpb24sIDEwMDApOw0KCX07DQoNCglsZXQgcmVzb2x2ZUFzQ2FsbGJhY2sgPSBmdW5jdGlvbigpew0KDQoJCWNvbnNvbGUubG9nKCJhc3luY2hyb25vdXNQcm9jZXNzIGhhcyBiZWVuIGV4ZWN1dGVkIik7DQoJfTsNCg0KCWxldCBwcm9taXNlID0gbmV3IFByb21pc2UoYXN5bmNocm9ub3VzUHJvY2Vzcyk7DQoNCglwcm9taXNlLnRoZW4ocmVzb2x2ZUFzQ2FsbGJhY2spOw0KDQoJY29uc29sZS5sb2coImVuZCBvZiBzY3JpcHQiKTsNCgkNCgl2YXIgZW52ID0gew0KCQllbGVtZW50OiBlbGVtZW50LA0KCQlsYW5ndWFnZTogbGFuZ3VhZ2UsDQoJCWdyYW1tYXI6IGdyYW1tYXIsDQoJCWNvZGU6IGNvZGUNCgl9Ow0KDQo8L2NvZGU+PC9wcmU+DQoqLw==";
-    s.src = "data:text/html;charset=utf-8,%2F*%0D%0A%3Cpre%3E%3Ccode%20class%3D%22language-javascript%22%3E%0D%0A%09let%20asynchronousProcess%20%3D%20function(resolve%2C%20reject)%7B%0D%0A%0D%0A%09%09console.log(%22start%20asynchronousProcess%20at%20'new%20Promise'%22)%3B%0D%0A%0D%0A%09%09let%20lateExecution%20%3D%20function()%7B%0D%0A%0D%0A%09%09%09console.log(%22lateExecution%20done%22)%3B%0D%0A%0D%0A%09%09%09resolve()%3B%0D%0A%09%09%7D%3B%0D%0A%0D%0A%09%09setTimeout(lateExecution%2C%201000)%3B%0D%0A%09%7D%3B%0D%0A%0D%0A%09let%20resolveAsCallback%20%3D%20function()%7B%0D%0A%0D%0A%09%09console.log(%22asynchronousProcess%20has%20been%20executed%22)%3B%0D%0A%09%7D%3B%0D%0A%0D%0A%09let%20promise%20%3D%20new%20Promise(asynchronousProcess)%3B%0D%0A%0D%0A%09promise.then(resolveAsCallback)%3B%0D%0A%0D%0A%09console.log(%22end%20of%20script%22)%3B%0D%0A%09%0D%0A%09var%20env%20%3D%20%7B%0D%0A%09%09element%3A%20element%2C%0D%0A%09%09language%3A%20language%2C%0D%0A%09%09grammar%3A%20grammar%2C%0D%0A%09%09code%3A%20code%0D%0A%09%7D%3B%0D%0A%0D%0A%3C%2Fcode%3E%3C%2Fpre%3E%0D%0A*%2F";
-*/
-
-</script>
+</body>

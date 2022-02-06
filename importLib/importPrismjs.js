@@ -1,9 +1,8 @@
-
-// import Prism.js
+console.log('importPrism.js');
 
 (function(){
-
-console.log(document.currentScript)
+    
+//console.log(document.currentScript)
 
     let scriptList = [
         '/externalLibraries/Prismjs/prism.js',
@@ -22,6 +21,7 @@ console.log(document.currentScript)
 
     for(path of scriptList){
         s = document.createElement("script");
+        s.setAttribute("defer", true);
         document.head.appendChild(s);
         s.src = rootPath + path;
     }

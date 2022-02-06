@@ -1,3 +1,4 @@
+console.log('BIND_codeElementsForPrismjs');
 
 (function(){
 
@@ -17,6 +18,7 @@
     elem.id = "elem_CODE_QUERY_SELECTORS_BINDER";
 
     elem.process = function(){
+        console.log('process');
 
         // js code
         let jsCodeElems = document.querySelectorAll(JS_CODE_QUERY_SELECTOR);
@@ -58,5 +60,10 @@
     document.head.appendChild(elem);
 
 
-    debug_elem = elem;
+    document.addEventListener("readystatechange", function(){
+        console.log('in readystatechange');
+        elem.process();
+    });
+
+
 })();
