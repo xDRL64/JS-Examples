@@ -1,4 +1,3 @@
-console.log('start_syntaxHighlighter.js');
 
 (function(){
 

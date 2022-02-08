@@ -1,4 +1,3 @@
-console.log('BIND_codeElementsForPrismjs');
 
 (function(){
 
@@ -18,7 +17,6 @@ console.log('BIND_codeElementsForPrismjs');
     elem.id = "elem_CODE_QUERY_SELECTORS_BINDER";
 
     elem.process = function(){
-        console.log('process');
 
         // js code
         let jsCodeElems = document.querySelectorAll(JS_CODE_QUERY_SELECTOR);
@@ -61,7 +59,6 @@ console.log('BIND_codeElementsForPrismjs');
 
 
     document.addEventListener("readystatechange", function(){
-        console.log('in readystatechange');
         elem.process();
     });
 

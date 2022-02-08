@@ -1,31 +1,18 @@
 
-<script src="./WRAP_pageRootBackPath.js"></script>
+<script src="./includes/WRAP_pageRootBackPath.js"></script>
 
-<script src="./start_syntaxHighlighter.js"></script>
+<script src="./includes/start_syntaxHighlighter.js"></script>
 
-<style>
-    p {
-        tab-size: 4;
-        white-space: pre;
-        font-family: 'Courier New', Courier, monospace;
-        background-color: #222222;
-        border-radius: 8px;
-    }
-    p.console {
-        color: rgb(235, 190, 41);
-    }
-    h2 {
-        margin-top: 64px;
-    }
-</style>
+<script src="./includes/import_cssStyles.js"></script>
+
 
 <body>
     
 
 <h1>download binary file from web browser</h1>
 
-<h2>Create file object</h2>
 
+<h2>Create file object</h2>
 <script class="code" src>
     let binaryData = new Uint8Array( [1,2,3,4,5] );
 
@@ -36,8 +23,8 @@
     let file = new File([binaryData], 'fileName', {type: "application/octet-stream"});
 </script>
 
-<h2>Download with generated hex string as file name</h2>
 
+<h2>Download with generated hex string as file name</h2>
 <script class="code" src>
     let url = URL.createObjectURL(file); // alloc memory
 
@@ -50,8 +37,8 @@
     URL.revokeObjectURL(url); // free memory
 </script>
 
-<h2>Download with 'download' as file name</h2>
 
+<h2>Download with 'download' as file name</h2>
 <script class="code" src>
     let reader = new FileReader();
 
@@ -62,7 +49,6 @@
 
 
 <h2>Download with specified file name (hidden html link (A tag) trick)</h2>
-
 <script class="code" src>
     let url = URL.createObjectURL(file); // alloc memory
 
@@ -82,11 +68,9 @@
 
 
 <h2>Home made function, with full support IE 11 and Firefox</h2>
-
 <a href="https://gist.github.com/davalapar/d0a5ba7cce4bc599f54800da22926da2">
     Source and more info
 </a>
-
 <script class="code" src>
 // Source : https://gist.github.com/davalapar/d0a5ba7cce4bc599f54800da22926da2
 

@@ -1,4 +1,3 @@
-console.log('importPrism.js');
 
 (function(){
     
