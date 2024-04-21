@@ -1,0 +1,21 @@
+
+p.code {
+	color: rgb(235, 41, 79);
+}
+p.console {
+	color: rgb(235, 190, 41);
+	tab-size: 4;
+	white-space: pre;
+	font-family: 'Courier New', Courier, monospace;
+	background-color: #222222;
+	border-radius: 8px;
+	padding: 1em;
+}
+h2 {
+	margin-top: 64px;
+}
+
+/* overwrite Prism.css Rules */
+code[class*=language-]{
+	padding: 1em !important;
+}
