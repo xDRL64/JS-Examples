@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Minimal Promise</title>
+
+	<script src="./includes/WRAP_pageRootBackPath.js"></script>
+	<script src="./includes/start_syntaxHighlighter.js"></script>
+	<script src="./includes/import_docsResources.js"></script>
+</head>
+
+<body>
+	
+
+<h1>Minimalist Promise behavior observation</h1>
+
+
+
+
+
+
+
+
+<h2>Error : Promise constructor miss argument</h2>
+<script class="code" src="">{{
+	const p = new Promise();
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	TypeError: Promise resolver undefined is not a function`;
+</script>
+
+
+
+
+
+
+<h2>Promise declaration needs a function as argument</h2>
+<script class="code" src="">{{
+	const p = new Promise( ()=>{} );
+
+	console.log(p);
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Unfolded Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}
+		[[Prototype]]: Promise
+			catch: ƒ catch()
+			constructor: ƒ Promise()
+			finally: ƒ finally()
+			then: ƒ then()
+			Symbol(Symbol.toStringTag): "Promise"
+			[[Prototype]]: Object
+		[[PromiseState]]: "pending"
+		[[PromiseResult]]: undefined`;
+</script>
+
+
+
+
+
+
+
+
+<h2>Unresolved Promise</h2>
+<iframe class="code" style="display: none;">
+	<script>
+		const p = new Promise( ()=>console.log('Promise Start') );
+		console.log(p);
+	</script>
+
+	<script>
+		// Still unresolved even after leaving its declaration <script>
+		console.log(p);
+	</script>
+</iframe>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (html)</div>
+
+<h3>Unfolded Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise Start
+
+	Promise {<pending>}
+		[[Prototype]]: Promise
+		[[PromiseState]]: "pending"
+		[[PromiseResult]]: undefined
+
+	Promise {<pending>}
+		[[Prototype]]: Promise
+		[[PromiseState]]: "pending"
+		[[PromiseResult]]: undefined`;
+</script>
+
+
+
+
+
+
+
+<h2>.then() does not run if the Promise is not resolved</h2>
+<script class="code" src="">{{
+	const p = new Promise( ()=>{} );
+
+	p.then( ()=>console.log('.then() Start') );
+
+	// That will display nothing in console
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	`;
+</script>
+
+
+
+
+
+
+
+
+<h2>.then() returns a Promise, even if parent Promise is unresolved</h2>
+<script class="code" src="">{{
+	const p = new Promise( ()=>{} );
+	const t = p.then();
+
+	console.log(t); // log the Promise got from .then()
+
+	console.log(p === t); // test if Promise Objects are the same Object
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}
+	
+	false`;
+</script>
+
+
+
+
+
+
+<h2>Promise stays unresolved even by returning value different than : undefined</h2>
+<script class="code" src="">{{
+		const p = (new Promise(()=>'DAT'));
+
+		console.log(p);
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}`;
+</script>
+
+
+
+
+
+
+
+
+
+
+<h2>Promise resolver</h2>
+<script class="code" src="">{{
+		// Promise constructor's 1st arg must be a function that will be used as resolver.
+
+		// This function must call its first parameter when it is supposed be resolved.
+
+		const p = new Promise( r=>r() );
+
+		console.log(p);
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Unfolded Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<fulfilled>: undefined}
+		[[Prototype]]: Promise
+		[[PromiseState]]: "fulfilled"
+		[[PromiseResult]]: undefined`;
+</script>
+
+
+
+
+
+
+
+
+<h2>.then() runs if the Promise is resolved</h2>
+<iframe class="code" style="display: none;">
+	<script>
+		const p = new Promise( r=>r() );
+
+		// Will run when leaving this <script>
+		p.then( ()=>console.log('.then() Start') );
+
+		console.log('1st Script End');
+	</script>
+
+	<script>
+		console.log('2nd Script Start');
+	</script>
+</iframe>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (html)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	1st Script End
+
+	.then() Start
+
+	2nd Script Start`;
+</script>
+
+
+
+
+
+
+
+
+<h2>When .then() runs, it returns a Promise</h2>
+<script class="code" src="">{{
+	const t = (new Promise( r=>r() )).then();
+
+	console.log(t);
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}`;
+</script>
+
+
+
+
+
+
+<h2>.then( callback ) returns a Promise as well</h2>
+<script class="code" src="">{{
+	const t = (new Promise( r=>r() )).then( ()=>'dat' );
+
+	console.log(t);
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}`;
+</script>
+
+
+
+
+
+
+
+
+
+
+<h2>Log of resolved Promise with return data</h2>
+<script class="code" src="">{{
+	const p = new Promise( r=>r('DAT') );
+
+	console.log(p);
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Unfolded Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<fulfilled>: 'DAT'}
+		[[Prototype]]: Promise
+		[[PromiseState]]: "fulfilled"
+		[[PromiseResult]]: "DAT"`;
+</script>
+
+
+
+
+
+
+
+
+
+
+<h2>Log of .then return from resolved Promise with resolver return</h2>
+<script class="code" src="">{{
+	// If .then() does nothing it is useless to call it.
+
+	const t = (new Promise( r=>r('DAT') )).then();
+
+	console.log(t);
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}`;
+</script>
+
+
+
+
+
+
+
+
+
+
+<h2>.then() callback 1st param reveives Promise resolver result</h2>
+<script class="code" src="">{{
+	(new Promise( r=>r('DAT') )).then( t=>console.log(t) );
+
+	console.log('Script End');
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Script End
+
+	DAT`;
+</script>
+
+
+
+
+
+
+
+
+<h2>Get .then() callback return value</h2>
+<iframe class="code" style="display: none;">
+	<script>
+		// Promise chain can start when leaving this <script>
+
+		const t = (new Promise( r=>r() )).then( ()=>'dat' );
+
+		t.then( r=>console.log(r) );
+
+		console.log('1st Script End');
+	</script>
+
+	<script>
+		console.log('2nd Script Start');
+	</script>
+</iframe>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (html)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	1st Script End
+
+	dat
+
+	2nd Script Start`;
+</script>
+
+
+
+
+
+
+
+
+
+
+<h2>Log of .then() resolving transition</h2>
+<iframe class="code" style="display: none;">
+	<script>
+		const T = (new Promise(r=>r('DAT'))).then(t=>{console.log(t);return 'dat'});
+
+		console.log(T);
+
+		debugger; // does a break to see the full unfolded log before console refreshing
+	</script>
+
+	<script>
+		console.log(T);
+	</script>
+</iframe>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (html)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}
+		[[Prototype]]: Promise
+		[[PromiseState]]: "pending"
+		[[PromiseResult]]: undefined
+
+	DAT
+	
+	Promise {<fulfilled>: 'dat'}
+		[[Prototype]]: Promise
+		[[PromiseState]]: "fulfilled"
+		[[PromiseResult]]: "dat"`;
+</script>
+
+
+
+
+
+
+
+
+
+
+<h2>Promise and .then() chaining</h2>
+<iframe class="code" style="display: none;">
+	<script>
+		const p = new Promise( r=>r('DAT') );
+		const t = p.then(a=>a).then(b=>b).then(c=>c).then(d=>console.log(d));
+		
+		console.log(t); // last chain .then() return a Promise, of course.
+		console.log('1st Script End');
+	</script>
+
+	<script>
+		console.log('2nd Script Start');
+	</script>
+</iframe>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (html)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<pending>}
+
+	1st Script End
+
+	DAT
+
+	2nd Script Start`;
+</script>
+
+
+
+
+
+
+
+
+
+
+
+<h2>Multiple chains' resolving order</h2>
+<script class="code" src="">{{
+	// _r returns a resolver function
+	const _r = function(text){
+		return r=>{ console.log(text); r(); };
+	};
+
+	const t = text=>console.log(text);
+
+	(new Promise( _r('p1') )).then( t('p1_a') ).then( t('p1_b') );
+
+	(new Promise( _r('p2') )).then( t('p2_a') ).then( t('p2_b') );
+
+	(new Promise( _r('p3') )).then( t('p3_a') ).then( t('p3_b') );
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	p1
+	p1_a
+	p1_b
+
+	p2
+	p2_a
+	p2_b
+
+	p3
+	p3_a
+	p3_b`;
+</script>
+
+
+
+
+
+
+
+<h2>Level deepness from constructor of Promise</h2>
+<script class="code" src="">{{
+		// _r returns a resolver function
+		const _r = function(text){
+			return r=>{ console.log(text); r(); };
+		};
+
+		const t = text=>console.log(text);
+
+		const P = text=> new Promise( _r(text) );
+
+		// new Promise() in chains will be traited in next execution cycles
+
+		(new Promise( _r('p1') )).then( ()=>P('_A') ).then( t('p1_b')   ).then( ()=>P('_B') );
+
+		(new Promise( _r('p2') )).then( t('p2_a')   ).then( ()=>P('_C') ).then( ()=>P('_D') );
+
+		(new Promise( _r('p3') )).then( t('p3_a')   ).then( t('p3_b')   ).then( ()=>P('_E') );
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	p1
+	p1_b
+
+	p2
+	p2_a
+
+	p3
+	p3_a
+	p3_b
+
+	_A
+
+	_C
+
+	_E
+	
+	_B
+	
+	_D`;
+</script>
+
+
+
+
+
+
+
+<h2>.then() always returns a Promise</h2>
+<script class="code" src="">{{
+	// If .then() callback returns a Promise, .then() returns a Promise
+
+	const p = new Promise( r=>r('DAT') );
+
+	(new Promise( r=>r() )).then(a=>a).then(()=>p).then(c=>c).then(d=>console.log(d));
+
+	// But if .then() callback returns a value, .then() still returns a Promise
+
+	(new Promise( r=>r() )).then(a=>a).then(()=>'dat').then(c=>c).then(d=>console.log(d));
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	dat
+
+	DAT`;
+</script>
+
+
+
+
+
+
+<!-- TEMPLATE 
+
+<h2>...</h2>
+
+<iframe class="code" style="display: none;">
+	<script>
+	</script>
+
+	<script>
+	</script>
+</iframe>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (html)</div>
+
+
+<script class="code" src="">{{
+
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	`;
+</script>
+
+-->
+
+
+<br><br>
+Now it could be intresting to read the next liked chapter :
+<a href="./async_function.html">Asynchronous Function</a> .
+<br>
+Get back to JS Examples index <a class="indexTbl">table</a> .
+
+</body>
+</html>

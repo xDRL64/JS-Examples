@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Asynchronous Function</title>
+
+	<script src="./includes/WRAP_pageRootBackPath.js"></script>
+	<script src="./includes/start_syntaxHighlighter.js"></script>
+	<script src="./includes/import_docsResources.js"></script>
+</head>
+
+<body>
+	
+<h1>Asynchronous Function</h1>
+
+
+<h2>Declaration</h2>
+<script class="code" src="">{{
+	// Use the keyword : async
+
+	const asynchronous_function = async ()=>{};
+
+	console.log( asynchronous_function );
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	async ()=>{}`;
+</script>
+
+
+<h2>Calling Return</h2>
+<script class="code" src="">{{
+	const asynchronous_function = async ()=>{};
+
+	// Calling an async function will return a Promise
+
+	const output = asynchronous_function();
+
+	console.log( output );
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Main log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<fulfilled>: undefined}`;
+</script>
+
+<h3>Unfolded log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Promise {<fulfilled>: undefined}
+		[[Prototype]]: Promise
+			catch: ƒ catch()
+			constructor: ƒ Promise()
+			finally: ƒ finally()
+			then: ƒ then()
+			Symbol(Symbol.toStringTag): "Promise"
+		[[Prototype]]: Object
+		[[PromiseState]]: "fulfilled"
+		[[PromiseResult]]: undefined`;
+</script>
+
+
+<h2>Calling Execution, starts as synchronous process</h2>
+<script class="code" src="">{{
+	const asynchronous_function = async ()=>{ console.log('Async Function is running'); };
+
+	// Calling an async function will return a Promise but,
+	// it also immediately runs the async function's body code content
+
+	asynchronous_function();
+
+	console.log( "Script's End" );
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Async Function is running
+	Script's End`;
+</script>
+
+
+<h2>While Execution, switches to asynchronous process</h2>
+<script class="code" src="">{{
+	// Here we are seening briefly two aspects about async process, 'await' and .then()
+	// which will be study in details later. (Also see your study of this topic as asynchronous lol)
+	// For now, just they are used to illustrate execution blocking.
+
+	// We need a concret asynchronous process, here it takes 1 second (1000ms)
+	const slowProcess = new Promise( resolve=>setTimeout(()=>resolve(),1000) );
+
+	const asynchronous_function = async ()=>{
+		console.log("Async Function's 0%");
+		
+		// Does not block execution until it gets response,
+		// it keeps going to next instruction.
+		slowProcess.then();
+
+		console.log("Async Function's 50%");
+
+		// Blocks execution until it gets response,
+		// it stops function's excution and gets out of it.
+		// True async execution starts now in parallel to the synchronous main program.
+		await slowProcess;
+
+		console.log("Async Function's 100%");
+	};
+
+	// Immediately runs the async function's body code content,
+	// and executes it until it encounters 'await' reserved keyword.
+	asynchronous_function();
+
+	console.log( "Script's End" );
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	Async Function's 0%
+	Async Function's 50%
+	Script's End
+	Async Function's 100%`;
+</script>
+
+
+<h2>Get the async function return</h2>
+<script class="code" src="">{{
+	// Write a 'return data' instruction in asynchronous_function,
+	// if not it is going to return 'undefined' .
+	const asynchronous_function = async ()=>{ return 'some data'; };
+
+	const the_promise = asynchronous_function();
+
+	// Use the method : .then()
+	// And pass a function (resolve, reject)=>{} as argument to .then()
+
+	// Here we only get and log the 'resolve' parameter.
+	// The return of asynchronous_function will be the 'resolve' received arguments.
+	// The log output will display the string : 'some data' .
+	the_promise.then( resolve=>console.log(resolve) );
+
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	some data`;
+</script>
+
+
+<br><br>
+Now it could be intresting to read the next liked chapter :
+<a href="./await_promise.html">Await Promise</a> .
+<br>
+Get back to JS Examples index <a class="indexTbl">table</a> .
+
+</body>
+</html>

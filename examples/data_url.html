@@ -1,0 +1,75 @@
+
+<script src="./includes/WRAP_pageRootBackPath.js"></script>
+
+<script src="./includes/start_syntaxHighlighter.js"></script>
+
+<script src="./includes/import_cssStyles.js"></script>
+
+
+<body>
+    
+
+<h1>Data URL</h1>
+
+<h2>Base64 Encoding / Decoding</h2>
+<script class="code" src="">
+
+    let binaryDataAsString = ([0x00,0x01,0xFF]).map(e=>String.fromCharCode(e)).join('');
+
+    let dataAsString = 'simply text' || '<htmlCode></htmlCode>' || binaryDataAsString;
+
+    let encodedBase64String = btoa(dataAsString);
+
+    let decodedBase64String = atob(encodedBase64String);
+</script>
+
+<h2>Media Type and Parameters</h2>
+<script class="code" src="">
+
+    // Data as text :
+
+        // Default Character Set (charset=US-ASCII) :
+        let dataURL = ('data:text/plain;charset=US-ASCII,'||'data:text/plain;,') + dataAsString;
+
+        // Unicode Character Set (charset=utf-8) :
+        let dataURL = 'data:text/plain;charset=utf-8,' + dataAsString;
+
+        let dataURL = 'data:text/html;charset=utf-8,' + dataAsString;
+
+        // Base64 Encoding Character Set (base64) :
+        let dataURL = 'data:text/html;base64,' + encodedBase64String;
+
+    // Data file :
+
+        // Base64 Encoding Character Set (base64) :
+
+            // PNG Image MIME Type (image/png)
+            // to use in image file address case
+            let dataURL = 'data:image/png;base64,' + encodedBase64String;
+
+            // Binary file MIME Type (application/octet-stream)
+            // to use in download file address case
+            let dataURL = 'data:application/octet-stream;base64,' + encodedBase64String;
+
+    // https://en.wikipedia.org/wiki/Media_type
+
+    // https://en.wikipedia.org/wiki/Data_URI_scheme
+
+    // https://css-tricks.com/data-uris/
+
+    /*
+        var uint8array = new TextEncoder().encode("¢");
+        var string = new TextDecoder().decode(uint8array);
+    */
+
+    // other sources :
+
+    // data:[<mime type>][;charset=<charset>][;base64],<encoded data>
+    // https://css-tricks.com/data-uris/
+
+</script>
+
+
+
+
+</body>

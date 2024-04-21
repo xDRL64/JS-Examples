@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>Await Promise</title>
+
+	<script src="./includes/WRAP_pageRootBackPath.js"></script>
+	<script src="./includes/start_syntaxHighlighter.js"></script>
+	<script src="./includes/import_docsResources.js"></script>
+</head>
+
+<body>
+	
+
+<h1>Await Promise</h1>
+
+
+<h2>Implementation</h2>
+<script class="code" src="">{{
+	// Use the keyword : await
+
+	// But, it is only available in a async function
+
+	// So, we declare an asynchronous function
+
+	const fn = async ()=>{
+
+		// In this async function scope,
+		// we can stop code execution and wait for Promise resolve return.
+
+		const promise = new Promise( (resolve)=>resolve('The Result') );
+
+		const result = await promise;
+
+		console.log( result );
+
+		console.log( 'END' );
+	};
+
+	fn(); // .then() is useless here because we do not care about fn() return value
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	The Result
+	END`;
+</script>
+
+
+<h2>Wait for .then() method</h2>
+<script class="code" src="">{{
+	const fn = async ()=>{
+
+		const promise = new Promise( (resolve)=>resolve('The Result') );
+
+		const the_result = await promise.then( result=>'resolve scope :: '+result );
+
+		console.log( the_result );
+
+		console.log( 'END' );
+	};
+
+	fn();
+}}</script>
+<div class="DOCS_TOOLBAR">[copy] [exec] [download] (js)</div>
+
+<h3>Log :</h3>
+<script class="log">
+	document.currentScript.logtxt =
+`	resolve scope :: The Result
+	END`;
+</script>
+
+
+<br><br>
+<br>
+Get back to JS Examples index <a class="indexTbl">table</a> .
+
+</body>
+</html>
